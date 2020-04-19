@@ -18,16 +18,6 @@ has 'repo' => (
 	}
 );
 
-has 'makemaker' => (
-	is	=> 'ro',
-	isa	=> 'Bool',
-	lazy	=> 1,
-	default	=> sub
-	{
-		$_[0]->payload->{makemaker} // 1;
-	}
-);
-
 has 'fake_release' => (
 	is	=> 'ro',
 	isa	=> 'Bool',
@@ -141,12 +131,6 @@ sub configure
 		'ConfirmRelease',
 	);
 
-	# use MakeMaker if requested
-	if ($self->makemaker)
-	{
-		$self->add_plugins ('MakeMaker');
-	}
-
 	# github bundle
 	if ($self->github)
 	{
@@ -210,10 +194,6 @@ sub configure
 =head1 ATTRIBUTES
 
 =over
-
-=item C<makemaker>
-
-If set to '1' (default), the C<MakeMaker> plugin is used.
 
 =item C<fake_relase>
 
